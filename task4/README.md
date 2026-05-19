@@ -1,126 +1,188 @@
-task4:
+# Softy Pinko Docker - Task 4 : Simplifier avec Docker Compose
 
-(venv) tommy@TommyJOUHANSPRO:~/holbertonschool-softy-pinko-docker/task4$ docker-compose down  
-[+] down 3/3
- ✔ Container task4-front-end-1 Removed                                                                                                               0.1s
- ✔ Container task4-back-end-1  Removed                                                                                                               0.1s
- ✔ Network task4_default       Removed                                                                                                               1.2s
-(venv) tommy@TommyJOUHANSPRO:~/holbertonschool-softy-pinko-docker/task4$ docker-compose build --no-cache
-[+] Building 58.3s (24/24) FINISHED                                                                                                                      
- => [internal] load local bake definitions                                                                                                          0.0s
- => => reading from stdin 1.15kB                                                                                                                    0.0s
- => [front-end internal] load build definition from Dockerfile                                                                                      0.0s
- => => transferring dockerfile: 472B                                                                                                                0.0s
- => [back-end internal] load build definition from Dockerfile                                                                                       0.0s
- => => transferring dockerfile: 322B                                                                                                                0.0s
- => [back-end internal] load metadata for docker.io/library/ubuntu:24.04                                                                            1.4s
- => [front-end internal] load metadata for docker.io/library/nginx:latest                                                                           0.0s
- => [front-end internal] load .dockerignore                                                                                                         0.0s
- => => transferring context: 2B                                                                                                                     0.0s
- => CACHED [front-end 1/3] FROM docker.io/library/nginx:latest                                                                                      0.0s
- => [front-end internal] load build context                                                                                                         0.0s
- => => transferring context: 6.43kB                                                                                                                 0.0s
- => [front-end 2/3] COPY ./softy-pinko-front-end /var/www/html/softy-pinko-front-end                                                                0.2s
- => [front-end 3/3] COPY ./softy-pinko-front-end.conf /etc/nginx/conf.d/default.conf                                                                0.1s
- => [front-end] exporting to image                                                                                                                  0.2s
- => => exporting layers                                                                                                                             0.1s
- => => writing image sha256:5973e248d60d8227d72632f733c408a7ce8bf2b834d2799f322b071f52e668f7                                                        0.0s
- => => naming to docker.io/library/softy-pinko-front-end:task4                                                                                      0.0s
- => [auth] library/ubuntu:pull token for registry-1.docker.io                                                                                       0.0s
- => [front-end] resolving provenance for metadata file                                                                                              0.0s
- => [back-end internal] load .dockerignore                                                                                                          0.0s
- => => transferring context: 2B                                                                                                                     0.0s
- => CACHED [back-end 1/7] FROM docker.io/library/ubuntu:24.04@sha256:c4a8d5503dfb2a3eb8ab5f807da5bc69a85730fb49b5cfca2330194ebcc41c7b               0.0s
- => [back-end internal] load build context                                                                                                          0.0s
- => => transferring context: 63B                                                                                                                    0.0s
- => [back-end 2/7] RUN apt-get update && apt-get install -y python3 python3-pip                                                                    48.2s
- => [back-end 3/7] RUN rm /usr/lib/python*/EXTERNALLY-MANAGED || true                                                                               0.4s
- => [back-end 4/7] WORKDIR /app                                                                                                                     0.1s
- => [back-end 5/7] COPY requirements.txt /app                                                                                                       0.1s
- => [back-end 6/7] RUN pip install -r /app/requirements.txt                                                                                         3.3s
- => [back-end 7/7] COPY api.py /app                                                                                                                 0.1s
- => [back-end] exporting to image                                                                                                                   3.6s
- => => exporting layers                                                                                                                             3.5s
- => => writing image sha256:2c377f83993d38d4324248686f895cf63ae72f33a78d6431852d88c55d3063e9                                                        0.0s
- => => naming to docker.io/library/softy-pinko-back-end:task4                                                                                       0.0s
- => [back-end] resolving provenance for metadata file                                                                                               0.0s
-[+] build 2/2
- ✔ Image softy-pinko-back-end:task4  Built                                                                                                          61.1s
- ✔ Image softy-pinko-front-end:task4 Built                                                                                                          61.1s
-(venv) tommy@TommyJOUHANSPRO:~/holbertonschool-softy-pinko-docker/task4$ docker-compose up
-[+] up 3/3
- ✔ Network task4_default       Created                                                                                                               1.3s
- ✔ Container task4-back-end-1  Created                                                                                                               0.1s
- ✔ Container task4-front-end-1 Created                                                                                                               0.1s
-Attaching to back-end-1, front-end-1
-back-end-1  |  * Serving Flask app 'api'
-back-end-1  |  * Debug mode: off
-back-end-1  | WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
-back-end-1  |  * Running on all addresses (0.0.0.0)
-back-end-1  |  * Running on http://127.0.0.1:5252
-back-end-1  |  * Running on http://172.19.0.2:5252
-back-end-1  | Press CTRL+C to quit
-front-end-1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
-front-end-1  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
-front-end-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
-front-end-1  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
-front-end-1  | 10-listen-on-ipv6-by-default.sh: info: /etc/nginx/conf.d/default.conf differs from the packaged version
-front-end-1  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
-front-end-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
-front-end-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
-front-end-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: using the "epoll" event method
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: nginx/1.31.0
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: built by gcc 14.2.0 (Debian 14.2.0-19) 
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: OS: Linux 6.6.87.2-microsoft-standard-WSL2
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1024:1048576
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker processes
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 28
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 29
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 30
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 31
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 32
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 33
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 34
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 35
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 36
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 37
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 38
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 39
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 40
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 41
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 42
-front-end-1  | 2026/05/18 14:45:45 [notice] 1#1: start worker process 43
-back-end-1   | 172.19.0.1 - - [18/May/2026 14:45:54] "GET /api/hello HTTP/1.1" 200 -
-back-end-1   | 172.19.0.1 - - [18/May/2026 14:45:54] "GET /favicon.ico HTTP/1.1" 404 -
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/css/bootstrap.min.css HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/css/font-awesome.css HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/images/left-image.png HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/css/templatemo-softy-pinko.css HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/js/popper.js HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/js/bootstrap.min.js HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/js/jquery-2.1.0.min.js HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/js/scrollreveal.min.js HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/images/featured-item-01.png HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/js/waypoints.min.js HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/js/jquery.counterup.min.js HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/js/imgfix.min.js HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/images/logo.png HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/js/custom.js HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/images/right-image.png HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/images/testimonial-icon.png HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/images/work-process-item-01.png HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/images/blog-item-02.png HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/images/blog-item-01.png HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/images/blog-item-03.png HTTP/1.1" 304 0 "http://localhost:9000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/images/banner-bg.png HTTP/1.1" 304 0 "http://localhost:9000/assets/css/templatemo-softy-pinko.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/images/fun-facts-bg.png HTTP/1.1" 304 0 "http://localhost:9000/assets/css/templatemo-softy-pinko.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/images/work-process-bg.png HTTP/1.1" 304 0 "http://localhost:9000/assets/css/templatemo-softy-pinko.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-front-end-1  | 172.19.0.1 - - [18/May/2026:14:45:58 +0000] "GET /assets/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 304 0 "http://localhost:9000/assets/css/font-awesome.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36" "-"
-back-end-1   | 172.19.0.1 - - [18/May/2026 14:45:59] "GET /api/hello HTTP/1.1" 200 -
+## Objectif
 
+Lancer **toute l'application en une seule commande** grâce à **Docker Compose**. Au lieu d'ouvrir deux terminaux et d'enchaîner plusieurs `docker build` et `docker run`, on déclare l'ensemble des services dans un fichier `docker-compose.yml`, et Docker s'occupe de tout : construction des images, création des conteneurs, mise en réseau, démarrage simultané.
 
-w Enable Watch   d Detach
-Le site : http://localhost:9000
-L'API : http://localhost:5252/api/hello
+## Pourquoi Docker Compose ?
+
+Quand une application n'a qu'un seul conteneur, lancer `docker build` puis `docker run` reste gérable. Mais dès qu'il y a plusieurs composants (back-end, front-end, base de données, cache, file de messages, etc.), enchaîner les commandes à la main devient :
+
+- **répétitif** : il faut retaper les bons ports, les bons noms, les bons tags à chaque démarrage
+- **fragile** : oublier une option (`-p`, `--name`, `--rm`) casse le déploiement
+- **non versionné** : la « configuration » d'exécution n'existe que dans la mémoire du développeur
+
+Docker Compose résout ces problèmes : la configuration est **déclarative** (dans un fichier YAML versionné dans Git), **reproductible** (toute personne qui clone le repo peut lancer l'app), et **scalable** (10 services se lancent aussi simplement qu'un seul).
+
+## Énoncé
+
+Faire une copie du dossier `task3` et la renommer `task4`. Puis :
+
+- Créer un fichier `docker-compose.yml` à la racine de `task4`
+- Y déclarer les **deux services** (`back-end` et `front-end`)
+- Pour chacun : indiquer le **contexte de build**, le **Dockerfile**, le **nom de l'image** et la **redirection de port**
+- Construire les images avec `docker-compose build`
+- Lancer l'application avec `docker-compose up`
+
+Mots-clés importants à utiliser : `services`, `build`, `context`, `dockerfile`, `image`, `ports`, `depends_on`.
+
+## Structure du projet
+
+```
+softy-pinko-docker/
+└── task4/
+    ├── docker-compose.yml          # nouveau
+    ├── back-end/
+    │   ├── api.py
+    │   ├── requirements.txt
+    │   └── Dockerfile
+    └── front-end/
+        ├── softy-pinko-front-end/
+        ├── Dockerfile
+        └── softy-pinko-front-end.conf
+```
+
+Les sous-dossiers `back-end` et `front-end` sont **identiques** à ceux de la Task 3. La seule nouveauté est le fichier `docker-compose.yml`.
+
+## Le fichier `docker-compose.yml`
+
+```yaml
+services:
+  back-end:
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    image: softy-pinko-back-end:task4
+    ports:
+      - "5252:5252"
+
+  front-end:
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    image: softy-pinko-front-end:task4
+    ports:
+      - "9000:9000"
+```
+
+### Explication directive par directive
+
+**`services:`**
+Liste tous les services (= conteneurs) qui composent l'application. Chaque service correspond à une image Docker qu'on souhaite faire tourner.
+
+**`back-end:` et `front-end:`**
+Noms logiques des services. Ils sont libres, mais doivent être uniques. Docker Compose les utilise ensuite comme **noms d'hôtes internes** : depuis le conteneur `front-end`, on peut joindre le back-end via `http://back-end:5252` (utile pour la Task 5 et au-delà).
+
+**`build:`**
+Indique à Compose comment **construire** l'image. C'est l'équivalent d'un `docker build`.
+
+- `context: ./back-end` : dossier qui sert de contexte de build (ce sont les fichiers que le Dockerfile peut copier)
+- `dockerfile: Dockerfile` : nom du fichier Dockerfile à utiliser dans ce contexte
+
+**`image: softy-pinko-back-end:task4`**
+Nom et tag à donner à l'image une fois construite. C'est l'équivalent du `-t` de `docker build`. Si l'image existe déjà localement avec ce nom, elle peut être réutilisée sans rebuild.
+
+**`ports:`**
+Liste des redirections de port, au format `"HÔTE:CONTENEUR"`.
+
+- `"5252:5252"` : le port `5252` de la machine hôte est mappé sur le port `5252` du conteneur (Flask)
+- `"9000:9000"` : pareil pour Nginx
+
+> Attention au format : `"5252:5252"` est entre guillemets car YAML interprète sinon `5252:5252` comme une notation horaire en base 60. La forme `"hôte:conteneur"` est sans ambiguïté.
+
+### À propos de `depends_on`
+
+Bien que les mots-clés à connaître incluent `depends_on`, il n'est pas indispensable ici. `depends_on` sert à **ordonner** le démarrage : par exemple `front-end: depends_on: [back-end]` ferait démarrer le back-end **avant** le front-end. Dans notre cas, les deux services peuvent démarrer en parallèle sans problème, donc on omet cette directive.
+
+## Construction des images
+
+Depuis le dossier `task4/` :
+
+```bash
+docker-compose build
+```
+
+Compose lit `docker-compose.yml`, repère les deux services, et exécute en séquence l'équivalent de :
+
+```bash
+docker build -f ./back-end/Dockerfile -t softy-pinko-back-end:task4 ./back-end
+docker build -f ./front-end/Dockerfile -t softy-pinko-front-end:task4 ./front-end
+```
+
+Les couches déjà mises en cache (depuis la Task 3) sont réutilisées : la construction est quasi instantanée.
+
+## Lancement de l'application
+
+```bash
+docker-compose up
+```
+
+Cette commande :
+
+1. Construit les images si elles n'existent pas (ou les utilise si déjà présentes)
+2. Crée un **réseau Docker** dédié (visible dans les logs : `Network task4_default Created`)
+3. Crée les conteneurs (`task4-back-end-1` et `task4-front-end-1`)
+4. Les démarre **en parallèle**
+5. **Attache** la sortie de tous les conteneurs au terminal courant
+
+### Sortie attendue
+
+```
+[+] Running 3/3
+ ⠿ Network task4_default        Created
+ ⠿ Container task4-back-end-1   Created
+ ⠿ Container task4-front-end-1  Created
+Attaching to task4-back-end-1, task4-front-end-1
+task4-back-end-1   |  * Serving Flask app 'api'
+task4-back-end-1   |  * Running on http://172.18.0.2:5252
+task4-front-end-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
+task4-front-end-1  | 2023/06/12 19:27:43 [notice] 1#1: nginx/1.25.0
+task4-front-end-1  | 2023/06/12 19:27:43 [notice] 1#1: start worker processes
+```
+
+Les logs des deux conteneurs sont **préfixés** par leur nom (`task4-back-end-1` / `task4-front-end-1`), ce qui permet de les distinguer en un coup d'œil. Plus besoin de deux terminaux.
+
+### Conventions de nommage
+
+Compose nomme automatiquement les ressources en utilisant le nom du dossier comme préfixe :
+
+- **Projet** : `task4` (nom du dossier)
+- **Réseau** : `task4_default`
+- **Conteneurs** : `task4-<service>-1` (le `-1` indique l'instance, utile en cas de scaling)
+
+## Le réseau Docker créé par Compose
+
+Compose crée automatiquement un **réseau bridge** privé pour l'application. À l'intérieur de ce réseau :
+
+- Les conteneurs peuvent se joindre entre eux par leur **nom de service** (DNS interne)
+- Le conteneur `front-end` peut résoudre `back-end` vers l'IP du conteneur back-end
+- Aucune configuration manuelle n'est nécessaire
+
+C'est un avantage majeur sur la Task 3 où il fallait s'en remettre au routage Docker par défaut. Cela ouvre la porte à utiliser des URLs internes comme `http://back-end:5252` au lieu de `http://localhost:5252`, ce qui sera exploité dans les tâches suivantes.
+
+## Tester l'application
+
+Ouvrir un navigateur sur [http://localhost:9000](http://localhost:9000) : le site doit s'afficher avec le titre dynamique `Hello, World!` injecté en haut, exactement comme dans la Task 3.
+
+## Commandes utiles de Docker Compose
+
+| Commande | Effet |
+|----------|-------|
+| `docker-compose build` | Construit ou reconstruit les images de tous les services |
+| `docker-compose up` | Démarre tous les services au premier plan |
+| `docker-compose up -d` | Démarre tous les services en arrière-plan (détaché) |
+| `docker-compose down` | Arrête et supprime tous les conteneurs et le réseau |
+| `docker-compose ps` | Liste les conteneurs gérés par Compose |
+| `docker-compose logs <service>` | Affiche les logs d'un service spécifique |
+| `docker-compose restart` | Redémarre tous les services |
+
+Pour **arrêter proprement** l'application : `CTRL+C` dans le terminal où tourne `docker-compose up`, puis `docker-compose down` pour nettoyer.
+
+## Concepts clés à retenir
+
+- **Orchestration** : Docker Compose orchestre plusieurs conteneurs comme un tout cohérent. C'est le premier pas vers des outils plus puissants comme Kubernetes.
+- **Configuration déclarative** : on **décrit l'état souhaité** (`docker-compose.yml`) au lieu d'enchaîner des commandes impératives. Le fichier est versionné, partageable, reproductible.
+- **YAML** : format texte structuré par indentation. Très lisible mais sensible aux espaces (toujours utiliser des **espaces**, jamais des tabs).
+- **Réseau implicite** : Compose crée un réseau privé où chaque service est joignable par son nom. C'est plus propre que de passer par `localhost` et les ports exposés.
+- **Mapping de ports `"hôte:conteneur"`** : indispensable pour qu'on puisse accéder aux services depuis le navigateur. Si on n'expose qu'un port (sans mapping), il reste accessible aux autres conteneurs mais pas à l'hôte.
+- **Une commande pour tout lancer** : `docker-compose up` remplace l'ensemble des `docker build` et `docker run` des tâches précédentes. C'est ce gain de simplicité qui justifie l'introduction de Compose.
